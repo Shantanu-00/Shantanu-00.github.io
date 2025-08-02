@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Shantanu Awate | Computer Engineering Portfolio showcasing full-stack and AI projects">
-  <meta name="keywords" content="Shantanu Awate portfolio, full-stack developer, React, Python, cybersecurity, Pune software engineer">
+  <meta name="description" content="Shantanu Awate | Software Developer Portfolio showcasing full-stack and AI projects">
+  <meta name="keywords" content="Shantanu Awate portfolio, software developer, React, Python, full-stack projects, Pune software engineer">
   <meta name="author" content="Shantanu Awate">
-  <title>Shantanu Awate | Full-Stack Developer</title>
-  <link rel="stylesheet" href="css/style.css">
-  <!-- Replace G-XXXXX with your actual Google Analytics ID if you intend to use it -->
+  <title>Shantanu Awate | Software Developer</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -18,124 +21,174 @@
   </script>
 </head>
 <body>
-  <header>
-    <nav>
-      <h1>Shantanu Awate</h1>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#leadership">Leadership</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="resume.pdf" target="_blank">Resume</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <img src="images/profile.jpg" alt="Profile photo of Shantanu Awate" class="profile-img">
-      <p>
-        I'm Shantanu Awate, a Computer Science & Engineering graduate (2025) with hands-on experience in full-stack web development and AI-powered tools. Proficient in C++, React, Python, and MySQL, I build scalable applications and lead technical initiatives. As Cybersecurity Lead at GDSC, I mentored peers and organized workshops. I’m passionate about solving real-world problems and contributing to high-impact engineering teams.
-      </p>
-    </section>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
 
-    <section id="skills">
-      <h2>Technical Skills</h2>
-      <ul class="skills-list">
-        <li><strong>Languages:</strong> C++, Python, JavaScript, SQL</li>
-        <li><strong>Web:</strong> React, Tailwind CSS, Node.js, Express.js, Flask</li>
-        <li><strong>AI/ML & CV:</strong> OpenCV, YOLOv8, Scikit-learn, Pandas, NumPy, NLTK</li>
-        <li><strong>Networking & Systems:</strong> Socket Programming (TCP/IP), OS Concepts, Wireshark, Linux</li>
-        <li><strong>Cybersecurity:</strong> Secure Coding, OWASP Top 10, Ethical Hacking Basics</li>
-        <li><strong>Tools:</strong> Git, GitHub, VS Code, Postman, Chrome DevTools</li>
-      </ul>
-    </section>
+    function Portfolio() {
+      const [activeSection, setActiveSection] = useState("about");
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    <section id="projects">
-      <h2>Featured Projects</h2>
+      useEffect(() => {
+        const handleScroll = () => {
+          const sections = ["about", "skills", "projects", "experience", "education", "contact"];
+          const scrollPosition = window.scrollY + 100;
 
-      <div class="project">
-        <h3>E-commerce Website</h3>
-        <p><strong>Stack:</strong> React, Tailwind CSS, Express.js, MySQL</p>
-        <p>Built a full-featured e-commerce platform with separate Admin and Customer portals. Implemented inventory management, shopping cart, secure authentication, and responsive design to support scalable user flows.</p>
-        <p>
-          <a href="https://github.com/Shantanu-00/ecommerce" target="_blank">GitHub</a> |
-          <a href="#" target="_blank">Live Demo</a>
-        </p>
-        <img src="images/ecommerce.png" alt="Screenshot of E-commerce Website by Shantanu Awate">
-      </div>
+          for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+              const offsetTop = element.offsetTop;
+              const offsetHeight = element.offsetHeight;
+              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                setActiveSection(section);
+                break;
+              }
+            }
+          }
+        };
 
-      <div class="project">
-        <h3>EduVisionAI - Personalized Study Enhancer</h3>
-        <p><strong>Stack:</strong> Python, OpenCV, YOLO, NLP</p>
-        <p>Designed an AI-driven tool for focus and distraction detection using computer vision, combined with automated summarization of study materials to improve learning efficiency. Collaborated in a team of 4 using Agile practices. (Oct 2024 – Feb 2025)</p>
-        <p>
-          <a href="https://github.com/Shantanu-00/V-1" target="_blank">GitHub</a> |
-          <a href="#" target="_blank">Live Demo</a>
-        </p>
-        <img src="images/eduvisionai.png" alt="Screenshot of EduVisionAI Study Enhancer">
-      </div>
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+      }, []);
 
-      <div class="project">
-        <h3>Password Generator Browser Extension</h3>
-        <p><strong>Stack:</strong> HTML, CSS, JavaScript</p>
-        <p>Created a Chrome extension that generates secure, customizable passwords with instant copy-to-clipboard functionality, improving user convenience in account creation workflows.</p>
-        <p>
-          <a href="https://github.com/Shantanu-00/V-1" target="_blank">GitHub</a> |
-          <a href="#" target="_blank">Live Demo</a>
-        </p>
-        <img src="images/password-generator.png" alt="Screenshot of Password Generator Extension">
-      </div>
-    </section>
-
-    <section id="leadership">
-      <h2>Leadership Experience</h2>
-      <div class="leadership-item">
-        <h3>Cybersecurity Lead, Google Developer Student Club (GDSC)</h3>
-        <p>2024 – 2025</p>
-        <ul>
-          <li>Led a team of 4 to organize cybersecurity workshops for 50+ students, delivering hands-on content on secure coding and ethical hacking.</li>
-          <li>Mentored juniors to build their technical foundation in cybersecurity concepts.</li>
-          <li>Developed practical workshop material and guided participants through real-world exercises.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="education">
-      <h2>Education</h2>
-      <div class="education-item">
-        <h3>B.E. in Computer Science & Engineering</h3>
-        <p>Shrimati Kashibai Navale College of Engineering, Pune | CGPA: 8.61/10 | 2021–2025</p>
-        <p class="small">Relevant Coursework: Data Structures, Algorithms, Database Management, Artificial Intelligence, Computer Networks, Machine Learning, Operating Systems</p>
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:shantanu1.edu@gmail.com">shantanu1.edu@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/shantanu-00" target="_blank">linkedin.com/in/shantanu-00</a></p>
-      <p>GitHub: <a href="https://github.com/Shantanu-00" target="_blank">github.com/Shantanu-00</a></p>
-      <p>Location: Pune, Maharashtra, India</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Shantanu Awate. All rights reserved.</p>
-  </footer>
-
-  <script>
-    document.querySelectorAll('nav a').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        if (this.getAttribute('href').startsWith('#')) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-          });
+      const scrollToSection = (sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
         }
-      });
-    });
+        setIsMenuOpen(false);
+      };
+
+      return (
+        <div className="min-h-screen bg-gray-100">
+          <header className="bg-gray-800 text-white sticky top-0 z-50">
+            <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Shantanu Awate
+              </h1>
+              <div className="hidden md:flex space-x-6">
+                {["about", "skills", "projects", "experience", "education", "contact", "resume"].map((section) => (
+                  <button
+                    key={section}
+                    onClick={() => section === "resume" ? window.open("resume.pdf", "_blank") : scrollToSection(section)}
+                    className={`capitalize text-lg transition-colors duration-300 hover:text-purple-400 ${
+                      activeSection === section ? "text-purple-400" : "text-gray-300"
+                    }`}
+                  >
+                    {section}
+                  </button>
+                ))}
+              </div>
+              <button
+                className="md:hidden text-gray-300 hover:text-purple-400"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <i className="fas fa-times w-6 h-6"></i> : <i className="fas fa-bars w-6 h-6"></i>}
+              </button>
+              {isMenuOpen && (
+                <div className="md:hidden absolute top-16 left-0 w-full bg-gray-800 border-t border-gray-700 py-4">
+                  {["about", "skills", "projects", "experience", "education", "contact", "resume"].map((section) => (
+                    <button
+                      key={section}
+                      onClick={() => section === "resume" ? window.open("resume.pdf", "_blank") : scrollToSection(section)}
+                      className="block w-full text-left py-2 px-4 capitalize text-gray-300 hover:text-purple-400 transition-colors duration-300"
+                    >
+                      {section}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </nav>
+          </header>
+
+          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            {/* About */}
+            <section id="about" className="mb-16">
+              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">About Me</h2>
+              <img src="images/profile.jpg" alt="Profile photo of Shantanu Awate" className="profile-img w-32 h-32 rounded-full mx-auto mb-4" />
+              <p className="text-lg text-gray-600 leading-relaxed">
+                I’m a Computer Science & Engineering graduate specializing in <strong>software development</strong>, building efficient, scalable, and user-focused applications. With proficiency in <strong>C++, Python, JavaScript, React, Node.js</strong>, and <strong>MySQL</strong>, I create solutions ranging from full-stack web apps to AI-powered tools. I’m passionate about solving real-world problems, writing clean maintainable code, and contributing to innovative teams.
+              </p>
+            </section>
+
+            {/* Skills */}
+            <section id="skills" className="mb-16">
+              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">Technical Skills</h2>
+              <ul className="skills-list grid grid-cols-1 md:grid-cols-2 gap-4">
+                <li className="bg-white p-4 rounded-lg shadow-md"><strong>Languages:</strong> C++, Python, JavaScript, SQL</li>
+                <li className="bg-white p-4 rounded-lg shadow-md"><strong>Web Development:</strong> React, Tailwind CSS, Node.js, Express.js, Flask</li>
+                <li className="bg-white p-4 rounded-lg shadow-md"><strong>Databases:</strong> MySQL, MongoDB</li>
+                <li className="bg-white p-4 rounded-lg shadow-md"><strong>AI/ML & CV:</strong> OpenCV, YOLOv8, Scikit-learn, Pandas, NumPy</li>
+                <li className="bg-white p-4 rounded-lg shadow-md"><strong>Networking & Systems:</strong> TCP/IP, OS Concepts, Wireshark, Linux</li>
+                <li className="bg-white p-4 rounded-lg shadow-md"><strong>Tools & DevOps:</strong> Git, GitHub, VS Code, Postman, Docker</li>
+              </ul>
+            </section>
+
+            {/* Projects */}
+            <section id="projects" className="mb-16">
+              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">Projects</h2>
+              <div className="project bg-white p-6 rounded-lg shadow-md mb-6">
+                <h3 className="text-xl font-semibold text-gray-800">E-commerce Website</h3>
+                <p><strong>Stack:</strong> React, Tailwind CSS, Express.js, MySQL</p>
+                <p className="text-gray-600">Developed a scalable e-commerce platform with Admin & Customer portals, inventory management, secure authentication, and responsive UI.</p>
+                <p><a href="https://github.com/Shantanu-00/ecommerce" target="_blank" className="text-purple-400 hover:text-purple-600">GitHub</a></p>
+              </div>
+              <div className="project bg-white p-6 rounded-lg shadow-md mb-6">
+                <h3 className="text-xl font-semibold text-gray-800">EduVisionAI - Study Enhancer</h3>
+                <p><strong>Stack:</strong> Python, OpenCV, YOLO, NLP</p>
+                <p className="text-gray-600">AI-powered tool for focus detection & study material summarization. Implemented distraction tracking & automated notes generation.</p>
+                <p><a href="https://github.com/Shantanu-00/V-1" target="_blank" className="text-purple-400 hover:text-purple-600">GitHub</a></p>
+              </div>
+              <div className="project bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold text-gray-800">Password Generator Extension</h3>
+                <p><strong>Stack:</strong> HTML, CSS, JavaScript</p>
+                <p className="text-gray-600">Chrome extension for generating secure passwords with instant copy-to-clipboard functionality.</p>
+                <p><a href="https://github.com/Shantanu-00/V-1" target="_blank" className="text-purple-400 hover:text-purple-600">GitHub</a></p>
+              </div>
+            </section>
+
+            {/* Experience */}
+            <section id="experience" className="mb-16">
+              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">Leadership & Experience</h2>
+              <div className="leadership-item bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold text-gray-800">Cybersecurity Lead, GDSC</h3>
+                <p className="text-gray-600">2024 – 2025</p>
+                <ul className="list-disc pl-5 text-gray-600">
+                  <li>Led a team of 4 to conduct cybersecurity workshops for 50+ students.</li>
+                  <li>Mentored juniors on secure coding practices and ethical hacking basics.</li>
+                  <li>Designed and delivered hands-on sessions for practical learning.</li>
+                </ul>
+              </div>
+            </section>
+
+            {/* Education */}
+            <section id="education" className="mb-16">
+              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">Education</h2>
+              <div className="education-item bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold text-gray-800">B.E. in Computer Science & Engineering</h3>
+                <p className="text-gray-600">Shrimati Kashibai Navale College of Engineering, Pune | CGPA: 8.61/10 | 2021–2025</p>
+              </div>
+            </section>
+
+            {/* Contact */}
+            <section id="contact" className="mb-16">
+              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">Contact</h2>
+              <p className="text-gray-600">Email: <a href="mailto:shantanu1.edu@gmail.com" className="text-purple-400 hover:text-purple-600">shantanu1.edu@gmail.com</a></p>
+              <p className="text-gray-600">LinkedIn: <a href="https://linkedin.com/in/shantanu-00" target="_blank" className="text-purple-400 hover:text-purple-600">linkedin.com/in/shantanu-00</a></p>
+              <p className="text-gray-600">GitHub: <a href="https://github.com/Shantanu-00" target="_blank" className="text-purple-400 hover:text-purple-600">github.com/Shantanu-00</a></p>
+              <p className="text-gray-600">Location: Pune, India</p>
+            </section>
+          </main>
+
+          <footer className="bg-gray-800 text-white py-4 text-center">
+            <p>&copy; 2025 Shantanu Awate. All rights reserved.</p>
+          </footer>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<Portfolio />, document.getElementById('root'));
   </script>
+  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </body>
 </html>
