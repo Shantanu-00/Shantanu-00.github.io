@@ -1,194 +1,659 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Shantanu Awate | Software Developer Portfolio showcasing full-stack and AI projects">
-  <meta name="keywords" content="Shantanu Awate portfolio, software developer, React, Python, full-stack projects, Pune software engineer">
-  <meta name="author" content="Shantanu Awate">
-  <title>Shantanu Awate | Software Developer</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/globals.css">
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXX');
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+        :root {
+            --header-height: 3.5rem;
+            --font-semi: 600;
+            --primary-color: #1B263B;
+            --secondary-color: #E63946;
+            --accent-color: #48BB78;
+            --neutral-color: #F7FAFC;
+            --text-color: #2D3748;
+            --body-font: "Poppins", sans-serif;
+            --big-font-size: 2rem;
+            --h2-font-size: 1.5rem;
+            --normal-font-size: 1rem;
+            --small-font-size: 0.875rem;
+            --mb-1: 0.5rem;
+            --mb-2: 1rem;
+            --mb-3: 1.5rem;
+            --mb-4: 2rem;
+            --z-fixed: 100;
+            --z-back: -10;
+        }
+        @media screen and (min-width: 769px) {
+            :root {
+                --big-font-size: 3rem;
+                --h2-font-size: 1.75rem;
+                --normal-font-size: 1.125rem;
+                --small-font-size: 1rem;
+            }
+        }
+        *, ::before, ::after {
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: var(--header-height) 0 0 0;
+            font-family: var(--body-font);
+            font-size: var(--normal-font-size);
+            color: var(--text-color);
+            background-color: var(--neutral-color);
+            line-height: 1.6;
+        }
+        h1, h2, p, ul {
+            margin: 0;
+        }
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .section-title {
+            font-size: var(--h2-font-size);
+            color: var(--primary-color);
+            margin: var(--mb-3) 0;
+            text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: "";
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .section {
+            padding: 3rem 0;
+        }
+        .bd-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--mb-2);
+            display: grid;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .l-header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: var(--z-fixed);
+            background: linear-gradient(to bottom, var(--primary-color), #2c3e50);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .nav {
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 var(--mb-2);
+        }
+        .nav__logo {
+            font-size: var(--h2-font-size);
+            font-weight: var(--font-semi);
+            color: var(--neutral-color);
+        }
+        .nav__menu {
+            display: flex;
+        }
+        .nav__list {
+            display: flex;
+            flex-direction: row;
+            gap: var(--mb-3);
+        }
+        .nav__link {
+            font-size: var(--normal-font-size);
+            color: var(--neutral-color);
+            padding: 0.5rem 1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav__link:hover, .active-link {
+            color: var(--accent-color);
+        }
+        .nav__link::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s;
+        }
+        .nav__link:hover::after, .active-link::after {
+            width: 80%;
+        }
+        .nav__toggle {
+            display: none;
+            font-size: 1.75rem;
+            color: var(--neutral-color);
+            cursor: pointer;
+        }
+        @media screen and (max-width: 768px) {
+            .nav__menu {
+                position: fixed;
+                top: var(--header-height);
+                right: -100%;
+                width: 80%;
+                height: 100%;
+                background: var(--primary-color);
+                padding: 2rem;
+                transition: right 0.3s ease-in-out;
+            }
+            .nav__menu.show {
+                right: 0;
+            }
+            .nav__list {
+                flex-direction: column;
+                gap: var(--mb-2);
+            }
+            .nav__toggle {
+                display: block;
+            }
+        }
+        @media screen and (max-width: 576px) {
+            .nav__menu {
+                width: 90%;
+            }
+        }
+        .home {
+            padding: 5rem 0 3rem;
+            text-align: center;
+            position: relative;
+        }
+        .home__data {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .home__title {
+            font-size: var(--big-font-size);
+            color: var(--primary-color);
+            margin-bottom: var(--mb-2);
+        }
+        .home__title-color {
+            color: var(--secondary-color);
+        }
+        .home__social {
+            display: flex;
+            justify-content: center;
+            gap: var(--mb-2);
+            margin: var(--mb-2) 0;
+        }
+        .home__social-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: color 0.3s;
+        }
+        .home__social-icon:hover {
+            color: var(--accent-color);
+        }
+        .home__img {
+            width: 180px;
+            height: 180px;
+            margin: 1.5rem auto;
+            background: radial-gradient(circle, var(--accent-color) 10%, var(--primary-color) 80%);
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .home__img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            color: var(--neutral-color);
+            padding: 0.75rem 2rem;
+            font-weight: var(--font-semi);
+            border-radius: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        .about__container, .skills__container, .experience__container, .education__container, .contact__container {
+            max-width: 800px;
+            text-align: center;
+        }
+        .about__subtitle, .skills__subtitle {
+            font-size: var(--h2-font-size);
+            color: var(--primary-color);
+            margin-bottom: var(--mb-2);
+        }
+        .about__text {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .skills__list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            padding: 0 var(--mb-2);
+        }
+        .skills__category {
+            margin-bottom: var(--mb-3);
+        }
+        .skills__category h3 {
+            font-size: var(--normal-font-size);
+            color: var(--secondary-color);
+            margin-bottom: var(--mb-1);
+        }
+        .skills__data {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            background: var(--neutral-color);
+            border-radius: 0.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        .skills__icon {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-right: var(--mb-1);
+        }
+        .skills__name {
+            font-size: var(--small-font-size);
+            font-weight: var(--font-semi);
+        }
+        .skills__bar {
+            width: 90%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .work__container {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .work__card {
+            background: var(--neutral-color);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .work__card:hover {
+            transform: translateY(-4px);
+        }
+        .work__img img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .work__title {
+            font-size: var(--normal-font-size);
+            color: var(--primary-color);
+            padding: var(--mb-1) var(--mb-2);
+            text-align: center;
+        }
+        .work__links {
+            display: flex;
+            justify-content: center;
+            gap: var(--mb-1);
+            padding: 0 var(--mb-2) var(--mb-2);
+        }
+        .work__links a {
+            font-size: var(--small-font-size);
+            color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--accent-color);
+            border-radius: 0.5rem;
+            transition: background 0.3s, color 0.3s;
+        }
+        .work__links a:hover {
+            background: var(--accent-color);
+            color: var(--neutral-color);
+        }
+        .contact__container p {
+            margin: var(--mb-1) 0;
+        }
+        .contact__container a {
+            color: var(--accent-color);
+            font-weight: var(--font-semi);
+        }
+        .footer {
+            background: var(--primary-color);
+            color: var(--neutral-color);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .footer__title {
+            font-size: var(--h2-font-size);
+            margin-bottom: var(--mb-2);
+        }
+        .footer__social {
+            display: flex;
+            justify-content: center;
+            gap: var(--mb-2);
+            margin-bottom: var(--mb-2);
+        }
+        .footer__icon {
+            font-size: 1.5rem;
+            color: var(--neutral-color);
+            transition: color 0.3s;
+        }
+        .footer__icon:hover {
+            color: var(--accent-color);
+        }
+        .footer__copy {
+            font-size: var(--small-font-size);
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--accent-color);
+            color: var(--neutral-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: none;
+            z-index: var(--z-fixed);
+            font-size: var(--small-font-size);
+            transition: opacity 0.3s;
+        }
+        .back-to-top.show {
+            display: block;
+            opacity: 1;
+        }
+        @media screen and (max-width: 576px) {
+            .home { padding: 3rem 0 2rem; }
+            .home__img { width: 140px; height: 140px; }
+            .home__title { font-size: 1.5rem; }
+            .section { padding: 2rem 0; }
+            .work__img img { height: 140px; }
+            .skills__list { grid-template-columns: 1fr; }
+        }
+        @media screen and (min-width: 577px) and (max-width: 768px) {
+            .home { padding: 4rem 0 2rem; }
+            .home__img { width: 160px; height: 160px; }
+            .skills__list { grid-template-columns: repeat(2, 1fr); }
+            .work__container { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media screen and (min-width: 769px) {
+            .home { padding: 6rem 0 3rem; }
+            .home__img { width: 200px; height: 200px; }
+            .skills__list { grid-template-columns: repeat(4, minmax(150px, 1fr)); }
+            .work__container { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media screen and (min-width: 1024px) {
+            .bd-grid { padding: 0; }
+            .home__img { width: 240px; height: 240px; }
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #edf2f7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #2c3e50, #38a169);
+        }
+    </style>
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <title>Shantanu's Portfolio</title>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel">
-    const { useState, useEffect } = React;
-
-    function Portfolio() {
-      const [activeSection, setActiveSection] = useState("about");
-      const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-      useEffect(() => {
-        const handleScroll = () => {
-          const sections = ["about", "skills", "projects", "experience", "education", "contact"];
-          const scrollPosition = window.scrollY + 100;
-
-          for (const section of sections) {
-            const element = document.getElementById(section);
-            if (element) {
-              const offsetTop = element.offsetTop;
-              const offsetHeight = element.offsetHeight;
-              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                setActiveSection(section);
-                break;
-              }
-            }
-          }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-      }, []);
-
-      const scrollToSection = (sectionId) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-        setIsMenuOpen(false);
-      };
-
-      return (
-        <div className="min-h-screen bg-gray-100">
-          <header className="bg-gray-800 text-white sticky top-0 z-50">
-            <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Shantanu Awate
-              </h1>
-              <div className="hidden md:flex space-x-6">
-                {["about", "skills", "projects", "experience", "education", "contact", "resume"].map((section) => (
-                  <button
-                    key={section}
-                    onClick={() => section === "resume" ? window.open("resume.pdf", "_blank") : scrollToSection(section)}
-                    className={`capitalize text-lg transition-colors duration-300 hover:text-purple-400 ${
-                      activeSection === section ? "text-purple-400" : "text-gray-300"
-                    }`}
-                  >
-                    {section}
-                  </button>
-                ))}
-              </div>
-              <button
-                className="md:hidden text-gray-300 hover:text-purple-400"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                {isMenuOpen ? <i className="fas fa-times w-6 h-6"></i> : <i className="fas fa-bars w-6 h-6"></i>}
-              </button>
-              {isMenuOpen && (
-                <div className="md:hidden absolute top-16 left-0 w-full bg-gray-800 border-t border-gray-700 py-4">
-                  {["about", "skills", "projects", "experience", "education", "contact", "resume"].map((section) => (
-                    <button
-                      key={section}
-                      onClick={() => section === "resume" ? window.open("resume.pdf", "_blank") : scrollToSection(section)}
-                      className="block w-full text-left py-2 px-4 capitalize text-gray-300 hover:text-purple-400 transition-colors duration-300"
-                    >
-                      {section}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </nav>
-          </header>
-
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            {/* About */}
-            <section id="about" className="mb-16">
-              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">About Me</h2>
-              <img src="images/profile.jpg" alt="Profile photo of Shantanu Awate" className="profile-img w-32 h-32 rounded-full mx-auto mb-4" />
-              <p className="text-lg text-gray-600 leading-relaxed">
-                I’m a Computer Science & Engineering graduate specializing in <strong>software development</strong>, building efficient, scalable, and user-focused applications. With proficiency in <strong>C++, Python, JavaScript, React, Node.js</strong>, and <strong>MySQL</strong>, I create solutions ranging from full-stack web apps to AI-powered tools. I’m passionate about solving real-world problems, writing clean maintainable code, and contributing to innovative teams.
-              </p>
-            </section>
-
-            {/* Skills */}
-            <section id="skills" className="mb-16">
-              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">Technical Skills</h2>
-              <ul className="skills-list grid grid-cols-1 md:grid-cols-2 gap-4">
-                <li className="bg-white p-4 rounded-lg shadow-md"><strong>Languages:</strong> C++, Python, JavaScript, SQL</li>
-                <li className="bg-white p-4 rounded-lg shadow-md"><strong>Web Development:</strong> React, Tailwind CSS, Node.js, Express.js, Flask</li>
-                <li className="bg-white p-4 rounded-lg shadow-md"><strong>Databases:</strong> MySQL, MongoDB</li>
-                <li className="bg-white p-4 rounded-lg shadow-md"><strong>AI/ML & CV:</strong> OpenCV, YOLOv8, Scikit-learn, Pandas, NumPy</li>
-                <li className="bg-white p-4 rounded-lg shadow-md"><strong>Networking & Systems:</strong> TCP/IP, OS Concepts, Wireshark, Linux</li>
-                <li className="bg-white p-4 rounded-lg shadow-md"><strong>Tools & DevOps:</strong> Git, GitHub, VS Code, Postman, Docker</li>
-              </ul>
-            </section>
-
-            {/* Projects */}
-            <section id="projects" className="mb-16">
-              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">Projects</h2>
-              <div className="project bg-white p-6 rounded-lg shadow-md mb-6">
-                <h3 className="text-xl font-semibold text-gray-800">E-commerce Website</h3>
-                <p><strong>Stack:</strong> React, Tailwind CSS, Express.js, MySQL</p>
-                <p className="text-gray-600">Developed a scalable e-commerce platform with Admin & Customer portals, inventory management, secure authentication, and responsive UI.</p>
-                <p><a href="https://github.com/Shantanu-00/ecommerce" target="_blank" className="text-purple-400 hover:text-purple-600">GitHub</a></p>
-              </div>
-              <div className="project bg-white p-6 rounded-lg shadow-md mb-6">
-                <h3 className="text-xl font-semibold text-gray-800">EduVisionAI - Study Enhancer</h3>
-                <p><strong>Stack:</strong> Python, OpenCV, YOLO, NLP</p>
-                <p className="text-gray-600">AI-powered tool for focus detection & study material summarization. Implemented distraction tracking & automated notes generation.</p>
-                <p><a href="https://github.com/Shantanu-00/V-1" target="_blank" className="text-purple-400 hover:text-purple-600">GitHub</a></p>
-              </div>
-              <div className="project bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold text-gray-800">Password Generator Extension</h3>
-                <p><strong>Stack:</strong> HTML, CSS, JavaScript</p>
-                <p className="text-gray-600">Chrome extension for generating secure passwords with instant copy-to-clipboard functionality.</p>
-                <p><a href="https://github.com/Shantanu-00/V-1" target="_blank" className="text-purple-400 hover:text-purple-600">GitHub</a></p>
-              </div>
-            </section>
-
-            {/* Experience */}
-            <section id="experience" className="mb-16">
-              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">Leadership & Experience</h2>
-              <div className="leadership-item bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold text-gray-800">Cybersecurity Lead, GDSC</h3>
-                <p className="text-gray-600">2024 – 2025</p>
-                <ul className="list-disc pl-5 text-gray-600">
-                  <li>Led a team of 4 to conduct cybersecurity workshops for 50+ students.</li>
-                  <li>Mentored juniors on secure coding practices and ethical hacking basics.</li>
-                  <li>Designed and delivered hands-on sessions for practical learning.</li>
+    <header class="l-header">
+        <nav class="nav bd-grid">
+            <div>
+                <a href="#" class="nav__logo">Shantanu</a>
+            </div>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
+                    <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
+                    <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
+                    <li class="nav__item"><a href="#experience" class="nav__link">Experience</a></li>
+                    <li class="nav__item"><a href="#education" class="nav__link">Education</a></li>
+                    <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
                 </ul>
-              </div>
-            </section>
-
-            {/* Education */}
-            <section id="education" className="mb-16">
-              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">Education</h2>
-              <div className="education-item bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold text-gray-800">B.E. in Computer Science & Engineering</h3>
-                <p className="text-gray-600">Shrimati Kashibai Navale College of Engineering, Pune | CGPA: 8.61/10 | 2021–2025</p>
-              </div>
-            </section>
-
-            {/* Contact */}
-            <section id="contact" className="mb-16">
-              <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-purple-400 pb-2 mb-4">Contact</h2>
-              <p className="text-gray-600">Email: <a href="mailto:shantanu1.edu@gmail.com" className="text-purple-400 hover:text-purple-600">shantanu1.edu@gmail.com</a></p>
-              <p className="text-gray-600">LinkedIn: <a href="https://linkedin.com/in/shantanu-00" target="_blank" className="text-purple-400 hover:text-purple-600">linkedin.com/in/shantanu-00</a></p>
-              <p className="text-gray-600">GitHub: <a href="https://github.com/Shantanu-00" target="_blank" className="text-purple-400 hover:text-purple-600">github.com/Shantanu-00</a></p>
-              <p className="text-gray-600">Location: Pune, India</p>
-            </section>
-          </main>
-
-          <footer className="bg-gray-800 text-white py-4 text-center">
-            <p>&copy; 2025 Shantanu Awate. All rights reserved.</p>
-          </footer>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </nav>
+    </header>
+    <main class="l-main">
+        <section class="home bd-grid" id="home">
+            <div class="home__data">
+                <h1 class="home__title">Hi, I'm <span class="home__title-color">Shantanu</span><br>Software Developer</h1>
+                <a href="/assets/resume.pdf" class="button" download>Download Resume</a>
+            </div>
+            <div class="home__social">
+                <a href="https://linkedin.com/in/shantanu-awate-a7291222a" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
+                <a href="mailto:shantanu1.edu@gmail.com" class="home__social-icon"><i class='bx bxs-envelope'></i></a>
+                <a href="https://github.com/Shantanu-00" class="home__social-icon"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="home__img">
+                <img src="/assets/images/profile.jpg" alt="Shantanu Awate">
+            </div>
+        </section>
+        <section class="about section" id="about">
+            <h2 class="section-title">About</h2>
+            <div class="about__container bd-grid">
+                <h2 class="about__subtitle">Shantanu Awate</h2>
+                <p class="about__text">B.E. Computer Science & Engineering graduate from Pune, India. Skilled in full-stack development and AI, I build efficient, user-focused applications with C++, Python, React, and more. Passionate about innovative solutions.</p>
+            </div>
+        </section>
+        <section class="skills section" id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills__container bd-grid">
+                <div class="skills__list">
+                    <div class="skills__category">
+                        <h3>Languages</h3>
+                        <div class="skills__data">
+                            <i class='bx bx-code skills__icon'></i>
+                            <span class="skills__name">C++</span>
+                            <div class="skills__bar"></div>
+                        </div>
+                        <div class="skills__data">
+                            <i class='bx bx-code-curly skills__icon'></i>
+                            <span class="skills__name">Python</span>
+                            <div class="skills__bar"></div>
+                        </div>
+                        <div class="skills__data">
+                            <i class='bx bxl-javascript skills__icon'></i>
+                            <span class="skills__name">JavaScript</span>
+                            <div class="skills__bar"></div>
+                        </div>
+                    </div>
+                    <div class="skills__category">
+                        <h3>Web Development</h3>
+                        <div class="skills__data">
+                            <i class='bx bxl-react skills__icon'></i>
+                            <span class="skills__name">React</span>
+                            <div class="skills__bar"></div>
+                        </div>
+                        <div class="skills__data">
+                            <i class='bx bxs-paint skills__icon'></i>
+                            <span class="skills__name">Tailwind CSS</span>
+                            <div class="skills__bar"></div>
+                        </div>
+                        <div class="skills__data">
+                            <i class='bx bxl-nodejs skills__icon'></i>
+                            <span class="skills__name">Node.js</span>
+                            <div class="skills__bar"></div>
+                        </div>
+                        <div class="skills__data">
+                            <i class='bx bx-server skills__icon'></i>
+                            <span class="skills__name">Express.js</span>
+                            <div class="skills__bar"></div>
+                        </div>
+                    </div>
+                    <div class="skills__category">
+                        <h3>Databases</h3>
+                        <div class="skills__data">
+                            <i class='bx bxs-data skills__icon'></i>
+                            <span class="skills__name">MySQL</span>
+                            <div class="skills__bar"></div>
+                        </div>
+                    </div>
+                    <div class="skills__category">
+                        <h3>Tools</h3>
+                        <div class="skills__data">
+                            <i class='bx bxl-git skills__icon'></i>
+                            <span class="skills__name">Git</span>
+                            <div class="skills__bar"></div>
+                        </div>
+                        <div class="skills__data">
+                            <i class='bx bxl-github skills__icon'></i>
+                            <span class="skills__name">GitHub</span>
+                            <div class="skills__bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="work section" id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="work__container bd-grid">
+                <div class="work__card">
+                    <div class="work__img">
+                        <img src="/assets/images/ecommerce.jpg" alt="E-commerce Website">
+                    </div>
+                    <h3 class="work__title">E-commerce Website</h3>
+                    <div class="work__links">
+                        <a href="https://github.com/Shantanu-00/ecommerce" class="button">GitHub</a>
+                        <a href="https://shantanu-ecommerce-demo.com" class="button">Live Demo will be working soon</a>
+                    </div>
+                </div>
+                <div class="work__card">
+                    <div class="work__img">
+                        <img src="/assets/images/eduvisionai.jpg" alt="EduVisionAI">
+                    </div>
+                    <h3 class="work__title">EduVisionAI</h3>
+                    <div class="work__links">
+                        <a href="https://github.com/Shantanu-00/V-1" class="button">GitHub</a>
+                    </div>
+                </div>
+                <div class="work__card">
+                    <div class="work__img">
+                        <img src="/assets/images/password-generator.jpg" alt="Password Generator">
+                    </div>
+                    <h3 class="work__title">Password Generator</h3>
+                    <div class="work__links">
+                        <a href="https://github.com/Shantanu-00/V-1" class="button">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="experience section" id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience__container bd-grid">
+                <h2 class="about__subtitle">Cybersecurity Lead, GDSC</h2>
+                <p class="about__text">2024–2025<br>Led cybersecurity workshops for 50+ students, mentoring on secure coding and ethical hacking.</p>
+            </div>
+        </section>
+        <section class="education section" id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="education__container bd-grid">
+                <h2 class="about__subtitle">B.E. Computer Science & Engineering</h2>
+                <p class="about__text">Shrimati Kashibai Navale College, Pune<br>CGPA: 8.61/10 | 2021–2025</p>
+            </div>
+        </section>
+        <section class="contact section" id="contact">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact__container bd-grid">
+                <p>Email: <a href="mailto:shantanu1.edu@gmail.com">shantanu1.edu@gmail.com</a></p>
+                <p>LinkedIn: <a href="https://linkedin.com/in/shantanu-00">linkedin.com/in/shantanu-00</a></p>
+                <p>GitHub: <a href="https://github.com/Shantanu-00">github.com/Shantanu-00</a></p>
+                <p>Location: Pune, India</p>
+                <a href="mailto:shantanu1.edu@gmail.com" class="button">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__title">Shantanu Awate</p>
+        <div class="footer__social">
+            <a href="https://linkedin.com/in/shantanu-awate-a7291222a" class="footer__icon"><i class='bx bxl-linkedin'></i></a>
+            <a href="https://github.com/Shantanu-00" class="footer__icon"><i class='bx bxl-github'></i></a>
         </div>
-      );
-    }
-
-    ReactDOM.render(<Portfolio />, document.getElementById('root'));
-  </script>
-  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+        <p class="footer__copy">&#169; Shantanu Awate. All rights reserved</p>
+    </footer>
+    <a href="#home" class="back-to-top" id="back-to-top">↑</a>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        const showMenu = (toggleId, navId) => {
+            const toggle = document.getElementById(toggleId),
+                  nav = document.getElementById(navId);
+            if (toggle && nav) {
+                toggle.addEventListener('click', () => {
+                    nav.classList.toggle('show');
+                });
+            }
+        };
+        showMenu('nav-toggle', 'nav-menu');
+        const navLink = document.querySelectorAll('.nav__link');
+        function linkAction() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.remove('show');
+        }
+        navLink.forEach(n => n.addEventListener('click', linkAction));
+        const sections = document.querySelectorAll('section[id]');
+        const scrollActive = () => {
+            const scrollDown = window.scrollY;
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight,
+                      sectionTop = current.offsetTop - 60,
+                      sectionId = current.getAttribute('id'),
+                      sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
+                if (sectionsClass) {
+                    if (scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight) {
+                        sectionsClass.classList.add('active-link');
+                    } else {
+                        sectionsClass.classList.remove('active-link');
+                    }
+                }
+            });
+        };
+        window.addEventListener('scroll', scrollActive);
+        const sr = ScrollReveal({
+            origin: 'top',
+            distance: '40px',
+            duration: 1500,
+            delay: 200
+        });
+        sr.reveal('.home__data, .about__container, .skills__container, .experience__container, .education__container, .contact__container', {});
+        sr.reveal('.home__social-icon, .work__card, .contact__container .button', { interval: 200 });
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+    </script>
 </body>
 </html>
