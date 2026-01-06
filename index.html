@@ -26,7 +26,7 @@
             --highlight-color: #F59E0B; /* Amber */
             --neutral-color: #F8FAFC;   /* Background */
             --white-color: #FFFFFF;
-            --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --card-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
             
             --body-font: "Poppins", sans-serif;
             
@@ -270,116 +270,179 @@
             font-size: 1.05rem;
         }
 
-        /* --- PROJECTS (Horizontal Scroll) --- */
-        .work__container {
-            display: flex; /* Changed from Grid to Flex */
-            overflow-x: auto; /* Horizontal Scroll */
-            gap: 2rem;
-            padding: 1rem 1rem 2.5rem 1rem; /* Padding for shadow clearance */
-            scroll-snap-type: x mandatory; /* Snap effect */
-            scrollbar-width: thin; /* Firefox */
-            scrollbar-color: var(--secondary-color) var(--neutral-color);
-        }
-        
-        /* Custom Scrollbar for Webkit */
-        .work__container::-webkit-scrollbar {
-            height: 8px;
-        }
-        .work__container::-webkit-scrollbar-track {
-            background: #e2e8f0;
-            border-radius: 4px;
-        }
-        .work__container::-webkit-scrollbar-thumb {
-            background-color: #94a3b8;
-            border-radius: 4px;
+        /* --- NEW PROJECTS SECTION (LANDSCAPE CARDS) --- */
+        .projects__container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem; /* Space between projects */
         }
 
-        .work__card {
-            min-width: 320px; /* Fixed width for items */
-            max-width: 320px;
+        .project__card {
             background-color: var(--white-color);
             border-radius: 1rem;
             overflow: hidden;
             box-shadow: var(--card-shadow);
+            border: 1px solid #f1f5f9;
             transition: .3s;
             display: flex;
             flex-direction: column;
-            border: 1px solid #f1f5f9;
-            scroll-snap-align: center; /* Snap logic */
         }
-        .work__card:hover {
+
+        .project__card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
-        .work__img {
-            height: 180px;
+
+        .project__img-wrapper {
+            width: 100%;
+            height: 250px;
             overflow: hidden;
-            background: #e2e8f0;
             position: relative;
+            background-color: #e2e8f0;
         }
-        .work__img img {
+
+        .project__img-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: .5s;
+            transition: transform 0.5s ease;
         }
-        .work__card:hover .work__img img {
-            transform: scale(1.05);
+
+        .project__card:hover .project__img-wrapper img {
+            transform: scale(1.03);
         }
-        .work__content {
-            padding: 1.5rem;
-            flex-grow: 1;
+
+        /* Overlay icon on image (optional visual cue) */
+        .project__overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .project__card:hover .project__overlay {
+            opacity: 1;
+        }
+        .project__overlay i {
+            color: white;
+            font-size: 3rem;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .project__content {
+            padding: 2rem;
+            flex: 1;
             display: flex;
             flex-direction: column;
         }
-        .work__tag {
+
+        .project__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .project__title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .project__badge {
             font-size: 0.75rem;
-            color: var(--accent-color);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-        }
-        .work__tag.winner { color: #D97706; }
-        
-        .work__title {
-            font-size: 1.25rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-        .work__desc {
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            color: var(--secondary-color);
-            flex-grow: 1;
-        }
-        .work__tech {
-            font-size: 0.8rem;
-            color: #64748b;
-            margin-bottom: 1.2rem;
-            background: #f1f5f9;
-            padding: 0.25rem 0.5rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 4px;
-            display: inline-block;
-            width: fit-content;
+            background: #f1f5f9;
+            color: var(--secondary-color);
+            white-space: nowrap;
+            margin-left: 1rem;
         }
-        .work__links {
+        .project__badge.winner {
+            background-color: #FEF3C7;
+            color: #D97706;
+            border: 1px solid #FCD34D;
+        }
+
+        .project__desc {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .project__stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            background: rgba(37, 99, 235, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            font-weight: 500;
+        }
+
+        .project__links {
+            margin-top: auto;
             display: flex;
             gap: 1rem;
-            margin-top: auto;
-            border-top: 1px solid #f1f5f9;
-            padding-top: 1rem;
         }
+
         .link__btn {
-            font-size: 0.875rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
             font-weight: 600;
-            color: var(--primary-color);
             display: inline-flex;
             align-items: center;
+            gap: 0.4rem;
+            transition: 0.3s;
         }
-        .link__btn:hover { color: var(--accent-color); }
-        .link__btn i { font-size: 1.2rem; margin-right: 0.25rem; }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .btn-outline {
+            border: 2px solid #e2e8f0;
+            color: var(--secondary-color);
+        }
+        .btn-outline:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Landscape Layout for Desktop */
+        @media screen and (min-width: 900px) {
+            .project__card {
+                flex-direction: row; /* Horizontal layout */
+                min-height: 300px;
+            }
+            .project__img-wrapper {
+                width: 45%; /* Image takes 45% */
+                height: auto;
+                min-height: 100%;
+            }
+            .project__content {
+                width: 55%; /* Content takes 55% */
+                padding: 2.5rem;
+            }
+        }
 
         /* --- SKILLS --- */
         .skills__container {
@@ -513,69 +576,124 @@
         <section class="work section" id="projects">
             <h2 class="section-title">Featured Engineering</h2>
             
-            <div class="work__container bd-grid">
+            <div class="projects__container bd-grid">
                 
-                <div class="work__card">
-                    <div class="work__img">
-                        <img src="assets/images/Darwinian-Agent-Engine.png" alt="Darwinian Engine" onerror="this.src='https://via.placeholder.com/400x250/0F172A/FFFFFF?text=Darwinian+Agent+Engine'">
+                <article class="project__card">
+                    <div class="project__img-wrapper">
+                        <img src="https://img.youtube.com/vi/I9qLDJmK2rU/maxresdefault.jpg" alt="Darwinian Agent Engine">
+                        <div class="project__overlay"><i class='bx bx-play-circle'></i></div>
                     </div>
-                    <div class="work__content">
-                        <span class="work__tag winner">🏆 AWS Hackathon Winner</span>
-                        <h3 class="work__title">Darwinian Agent Engine</h3>
-                        <p class="work__desc">A self-healing infrastructure where AI agents detect failures, mutate their own code, and redeploy automatically.</p>
-                        <div class="work__tech">AWS Bedrock • Step Functions • DynamoDB</div>
-                        <div class="work__links">
-                            <a href="https://github.com/Shantanu-00/Codex-Vitae" target="_blank" class="link__btn"><i class='bx bxl-github'></i> Code</a>
-                            <a href="#" class="link__btn"><i class='bx bx-play-circle'></i> Demo</a>
+                    <div class="project__content">
+                        <div class="project__header">
+                            <h3 class="project__title">Darwinian Agent Engine</h3>
+                            <span class="project__badge winner"><i class='bx bxs-trophy'></i> AWS Winner</span>
+                        </div>
+                        <p class="project__desc">
+                            A self-healing infrastructure where AI agents detect failures, mutate their own code, and redeploy automatically. This project pushes the boundaries of agentic autonomy using evolutionary algorithms.
+                        </p>
+                        <div class="project__stack">
+                            <span class="tech-tag">AWS Bedrock</span>
+                            <span class="tech-tag">Step Functions</span>
+                            <span class="tech-tag">DynamoDB</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                        <div class="project__links">
+                            <a href="https://youtu.be/I9qLDJmK2rU?si=RNJ_VaVbgAeBcj4-" target="_blank" class="link__btn btn-primary">
+                                <i class='bx bxl-youtube'></i> Watch Demo
+                            </a>
+                            <a href="https://github.com/Shantanu-00/The-Darwinian-Engine-Self-Evolving-AI-Agents" target="_blank" class="link__btn btn-outline">
+                                <i class='bx bxl-github'></i> Code
+                            </a>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <div class="work__card">
-                    <div class="work__img">
-                         <img src="assets/images/thumbnail.png" alt="Autonomic AI" onerror="this.src='https://via.placeholder.com/400x250/2563EB/FFFFFF?text=Autonomic+AI'">
+                <article class="project__card">
+                    <div class="project__img-wrapper">
+                        <img src="https://img.youtube.com/vi/zMZElVLj59Y/maxresdefault.jpg" alt="Autonomic AI">
+                        <div class="project__overlay"><i class='bx bx-play-circle'></i></div>
                     </div>
-                    <div class="work__content">
-                        <span class="work__tag">Enterprise Architecture</span>
-                        <h3 class="work__title">Autonomic AI</h3>
-                        <p class="work__desc">Production-grade agent orchestration system featuring full observability (Datadog) and GCP microservices.</p>
-                        <div class="work__tech">GCP • Datadog • Docker • Monorepo</div>
-                        <div class="work__links">
-                            <a href="https://github.com/Shantanu-00" target="_blank" class="link__btn"><i class='bx bxl-github'></i> Org Repo</a>
+                    <div class="project__content">
+                        <div class="project__header">
+                            <h3 class="project__title">Autonomic AI</h3>
+                            <span class="project__badge">Enterprise Architecture</span>
+                        </div>
+                        <p class="project__desc">
+                            Production-grade agent orchestration system featuring full observability. Designed for complex workflows requiring reliability and monitoring at scale.
+                        </p>
+                        <div class="project__stack">
+                            <span class="tech-tag">GCP</span>
+                            <span class="tech-tag">Datadog</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Monorepo</span>
+                        </div>
+                        <div class="project__links">
+                            <a href="https://autonomic-ai-438082704692.us-west1.run.app/" target="_blank" class="link__btn btn-primary">
+                                <i class='bx bx-globe'></i> Live Site
+                            </a>
+                            <a href="https://youtu.be/zMZElVLj59Y?si=qxDCxC7TW-IHCRK3" target="_blank" class="link__btn btn-outline">
+                                <i class='bx bxl-youtube'></i> Video
+                            </a>
+                            <a href="https://github.com/Autonomic-Ai-hackathon/Autonomic-AI" target="_blank" class="link__btn btn-outline">
+                                <i class='bx bxl-github'></i> Repo
+                            </a>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <div class="work__card">
-                    <div class="work__img">
-                         <img src="assets/images/pathsense.png" alt="PathSense" onerror="this.src='https://via.placeholder.com/400x250/10B981/FFFFFF?text=PathSense+Logistics'">
+                <article class="project__card">
+                    <div class="project__img-wrapper">
+                         <img src="assets/images/pathsense.png" alt="PathSense" onerror="this.src='https://via.placeholder.com/600x400/10B981/FFFFFF?text=PathSense+Logistics'">
                     </div>
-                    <div class="work__content">
-                        <span class="work__tag">Logistics Engine</span>
-                        <h3 class="work__title">PathSense Optimization</h3>
-                        <p class="work__desc">Algorithmic routing engine reducing travel distance by 35% using Genetic Algorithms and custom heuristics.</p>
-                        <div class="work__tech">FastAPI • Next.js • OSRM • Genetic Algos</div>
-                        <div class="work__links">
-                            <a href="https://github.com/Shantanu-00/PathSense" target="_blank" class="link__btn"><i class='bx bxl-github'></i> Code</a>
-                            <a href="https://v0-path-sense.vercel.app" target="_blank" class="link__btn"><i class='bx bx-link-external'></i> Live</a>
+                    <div class="project__content">
+                        <div class="project__header">
+                            <h3 class="project__title">PathSense Optimization</h3>
+                            <span class="project__badge">Logistics Engine</span>
+                        </div>
+                        <p class="project__desc">
+                            Algorithmic routing engine reducing travel distance by 35% using Genetic Algorithms and custom heuristics. Solves the Traveling Salesman Problem with real-world constraints.
+                        </p>
+                        <div class="project__stack">
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">OSRM</span>
+                            <span class="tech-tag">Genetic Algos</span>
+                        </div>
+                        <div class="project__links">
+                            <a href="https://v0-path-sense.vercel.app" target="_blank" class="link__btn btn-primary">
+                                <i class='bx bx-globe'></i> Live Demo
+                            </a>
+                            <a href="https://github.com/Shantanu-00/PathSense" target="_blank" class="link__btn btn-outline">
+                                <i class='bx bxl-github'></i> Code
+                            </a>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <div class="work__card">
-                    <div class="work__img">
-                         <img src="assets/images/crucible.png" alt="Crucible" onerror="this.src='https://via.placeholder.com/400x250/F59E0B/FFFFFF?text=Crucible+Edge+AI'">
+                <article class="project__card">
+                    <div class="project__img-wrapper">
+                         <img src="assets/images/crucible.png" alt="Crucible" onerror="this.src='https://via.placeholder.com/600x400/F59E0B/FFFFFF?text=Crucible+Edge+AI'">
                     </div>
-                    <div class="work__content">
-                        <span class="work__tag">Edge AI / Privacy</span>
-                        <h3 class="work__title">Crucible</h3>
-                        <p class="work__desc">Privacy-first user profiling engine running entirely on-device using Gemini Nano and Chrome APIs.</p>
-                        <div class="work__tech">Gemini Nano • Chrome Manifest V3</div>
-                        <div class="work__links">
-                            <a href="https://github.com/Shantanu-00/crucible-chrome-extension" target="_blank" class="link__btn"><i class='bx bxl-github'></i> Code</a>
+                    <div class="project__content">
+                        <div class="project__header">
+                            <h3 class="project__title">Crucible</h3>
+                            <span class="project__badge">Edge AI / Privacy</span>
+                        </div>
+                        <p class="project__desc">
+                            Privacy-first user profiling engine running entirely on-device using Gemini Nano and Chrome APIs. Ensures zero data egress while providing personalized AI experiences.
+                        </p>
+                        <div class="project__stack">
+                            <span class="tech-tag">Gemini Nano</span>
+                            <span class="tech-tag">Chrome Manifest V3</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project__links">
+                            <a href="https://github.com/Shantanu-00/crucible-chrome-extension" target="_blank" class="link__btn btn-primary">
+                                <i class='bx bxl-github'></i> View Code
+                            </a>
                         </div>
                     </div>
-                </div>
+                </article>
 
             </div>
         </section>
@@ -727,8 +845,7 @@
         sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
         sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
         sr.reveal('.home__social-icon',{ interval: 200}); 
-        /* Removed work__img from here to let horizontal scroll be natural, added skills__list */
-        sr.reveal('.skills__list, .contact__input',{interval: 200}); 
+        sr.reveal('.skills__list, .project__card, .contact__input',{interval: 200}); 
     </script>
 </body>
 </html>
